@@ -1,0 +1,38 @@
+.pok-de-container {
+    margin: auto;
+    display: -webkit-flex;
+    display: flex;
+    width: 80%;
+    height: 100%;
+    background-color: white;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.6);
+}
+
+.pok-de-img {
+    background-color: white;
+    width: 25%;
+    height: 90%;
+    margin: 10px;
+}
+
+.pok-de-table {
+    background-color: white;
+    width: 75%;
+    height: 90%;
+    margin: 10px;
+}
+
+.pok-de-info-th, .pok-de-info-td {
+    padding: 10px;
+    text-align:left;
+
+}
+
+.bg-grad1 {
+    height: 100%;
+    background: ; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#3dba92, #b3e791); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#3dba92, #b3e791); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#3dba92, #b3e791); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#3dba92, #b3e791); /* Standard syntax (must be last) */
+}

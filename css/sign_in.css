@@ -1,0 +1,43 @@
+/*
+	CSS script for sign_in.html file
+*/
+input[type=text], input[type=password] {
+	width: 20%;
+	padding: 6px 10px;
+	margin:4px 0;
+	border: 5px solid #2794E3
+	align-self: center;
+	box-sizing: border-box;
+}
+
+input[type=submit], input[type=reset] {
+	background-color: #2794E3;
+	border: none;
+	color: white;
+	padding: 1% 5%;
+	margin-left: 4px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	display: inline-block; 
+}
+
+.submit_press:hover {
+	color: #FFCB08
+}
+
+a:link {
+	background-color: #2794E3;
+	border: none;
+	color: white;
+	padding: 1% 5%;
+	margin-left: 4px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	display: inline-block;
+}
+
+a:hover {
+	color: #FFCB08
+}

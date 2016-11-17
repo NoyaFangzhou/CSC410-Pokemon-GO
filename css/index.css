@@ -1,0 +1,57 @@
+/**
+  * The CSS File for the main page
+  */
+
+/*
+	All submit, reset and button element
+*/ 
+button, input[type=submit] {
+	background-color: #2794E3;
+	border: none;
+	color: white;
+	padding: 1% 5%;
+	margin-left: 4px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	display: inline-block; 
+}
+
+/*
+	All submit, reset and button element, when we move the mouse on these element
+*/ 
+.button_press:hover, .submit_press:hover {
+	color: #FFCB08
+}
+
+
+/*
+	All submit, reset and button element
+*/ 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a, #name_logo {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    color: #FFCB08;
+}
+
+.active {
+    background-color: #2794E3;
+}
