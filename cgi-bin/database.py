@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import pymysql
 
 create_user_table =  'CREATE TABLE IF NOT EXISTS user_account(ID int(255) auto_increment primary key, user_ID varchar(255) ,nickname varchar(255) , password varchar(255), salt varchar(255))'
@@ -5,7 +6,7 @@ create_user_table =  'CREATE TABLE IF NOT EXISTS user_account(ID int(255) auto_i
 def  connect():
 
 	try:
-		conn = pymysql.connect(host = 'localhost' , user = 'root' , password = 'mysql' , db = 'web_pokemon')
+		conn = pymysql.connect(host = 'localhost' , user = 'root' , password = '19931026' , db = 'web_pokemon')
 		return conn
 	except Exception :
 		print 'An error has ocurred when trying to connect to the database' 

@@ -1,0 +1,182 @@
+<!-- This is the main page for our Pokemon Website -->
+<!-- Using Bootstrap as the CSS Framework -->
+<!-- Author: Fangzhou Liu(Jerry) -->
+<!-- Date: Nov. 18, 2016 -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to Pokemon World!</title>
+	<!-- device dependent -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- load bootstrap framework -->
+	<link rel="stylesheet" type="text/css" href="./bootstrap-3.3.0/dist/css/bootstrap.min.css">
+	<!-- <link href="./CSS/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+	<!-- load Flat-UI plugins -->
+	<link rel="stylesheet" type="text/css" href="./CSS/Flat-UI-master/dist/css/flat-ui.min.css">
+	<link href="./CSS/Flat-UI-master/dist/css/flat-ui.css" rel="stylesheet">
+	<!-- load jQuery -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="./bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- include JS -->
+    <script type="text/javascript" src="./js/index.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse" role="navigation">
+	  <div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+	      <span class="sr-only">Toggle navigation</span>
+	    </button>
+	    <a class="navbar-brand" href="#">Pokemon Go!</a>
+	  </div>
+	  <div class="collapse navbar-collapse" id="navbar-collapse-01">
+	    <ul id="nav_items" class="nav navbar-nav">
+	      <li class="active" id="home"></li>
+	      <li id="posts"></li>
+	      <li  id="pokemons"></li>
+	      <li  id="profile"></li>
+	      <li id="logout"></li>
+	    </ul>
+	    <!-- Button Trigger Modal -->
+	    <p class="navbar-form navbar-right" id="sign_up_btn"><button class="btn btn-default navbar-btn" data-toggle="modal" data-target="#signup_panel" type="button">Sign Up</button></p>
+	    <p class="navbar-form navbar-right"><button class="btn btn-default navbar-btn" data-toggle="modal" data-target="#login_panel" type="button" id="sign_in_btn">Sign In</button></p>
+	    <p class="navbar-text navbar-right" id="name_logo"></p>
+	  </div><!-- /.navbar-collapse -->
+	</nav><!-- /navbar -->
+
+	<div>
+		<img src="./image/index.jpg" width="100%" height="20%">
+		<!-- Login Modal View -->
+		<div class="modal fade" id="login_panel">
+			<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="login_label">Login</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+						<div id="error_panel_signin" class="alert alert-danger" role="alert"></div>
+						<div class="form-group">
+							<label for="input_usrname" class="col-lg-2 control-label">Username:</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="username" name="username" placeholder="Please input your username">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="input_password" class="col-lg-2 control-label">Password:</label>
+							<div class="col-lg-10">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Please input your password">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-offset-2 col-lg-10">
+								<label class="checkbox" for="remember_me">
+                  					<input type="checkbox" data-toggle="checkbox" value="" id="remember_me">Remember me
+                				</label>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" id="login_btn">Sign In</button>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<!-- Sign Up Modal View -->
+		<div class="modal fade bd-examplemodal-lg" id="signup_panel">
+			<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="signup_label">Sign Up</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form">
+						<div id="error_panel_signup" class="alert alert-danger" role="alert"></div>
+						<div class="form-group">
+							<label for="username" class="col-lg-2 control-label">Username:</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="username" name="username" placeholder="Please input your username">
+							</div>
+						</div>
+						<p id="error_panel"></p>
+						<div class="form-group">
+							<label for="nickname" class="col-lg-2 control-label">Nickname:</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="kickname" name="kickname" placeholder="Please input your username">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-lg-2 control-label">Password:</label>
+							<div class="col-lg-10">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Please input your password">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="re_password" class="col-lg-2 control-label"></label>
+							<div class="col-lg-10">
+								<input type="re_password" class="form-control" id="re_password" name="re_password" placeholder="Please input your password again">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="col-lg-2 control-label">Email:</label>
+							<div class="col-lg-10">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Please input your email address">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="team" class="col-lg-2 control-label">Team:</label>
+							<div class="col-lg-10">
+						          <div class="row">
+						            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+						              <div class="tile">
+						              	<h3 class="tile-title">Mystic</h3>
+						                <label for="team_mystic"><img src="./image/mystic.jpg" alt="Compas" class="tile-image big-illustration"></label>
+										<input type="radio" name="team" value="mystic" id="team_mystic">
+						              </div>
+						            </div>
+
+						            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+						              <div class="tile">
+						              	<h3 class="tile-title">Valor</h3>
+						                <label for="team_valor"><img src="./image/valor.jpg" alt="Compas" class="tile-image big-illustration"></label>	
+										<input type="radio" data-toggle="radio" name="team" value="valor" id="team_valor">
+						              </div>
+						            </div>
+
+						            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+						              <div class="tile">
+						              	<h3 class="tile-title">Instinct</h3>
+						                <label for="team_instinct"><img src="./image/instinct.jpg" alt="Compas" class="tile-image big-illustration"></label>
+						                <!-- <input type="radio" data-toggle="radio" name="optionsRadios" id="optionsRadios1" value="option1" data-radiocheck-toggle="radio" required>Radio is off -->
+										<input type="radio" name="team" value="instinct" id="team_instinct">
+						              </div>
+						            </div>
+						            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+						              <div class="tile">
+						              	<h3 class="tile-title">Un Decide</h3>
+						                <label for="team_undecide"><img src="./image/undecide.jpg" alt="Compas" class="tile-image big-illustration"></label>
+										<input type="radio" name="team" value="undecide" id="team_undecide">
+						              </div>
+						          	</div>
+						        </div> <!-- /row -->
+						    </div> 
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="reset" class="btn btn-primary">Reset</button>
+					<button type="submit" class="btn btn-primary">Sign Up</button>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
