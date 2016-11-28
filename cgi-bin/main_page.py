@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 
 # use cookie for persistant data storage
 # if no cookie, return the login page
@@ -49,8 +49,8 @@ else:
   if "password" in cookie:
     password = cookie["password"].value
 
- # do some username & password verifications
- [stat, info] = verification.login_verify(username, password)
+  # do some username & password verifications
+  [stat, info] = verification.login_verify(username, password)
 
   if stat:
     data['user_name'] = username

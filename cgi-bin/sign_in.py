@@ -1,65 +1,70 @@
-#!C:\Users\nevgivin\Anaconda2\python.exe
+#!/usr/bin/python
 
-import cgi
 import cgitb
-import database
-import datetime
-import hashlib
+import cgi
+import Cookie
+import os
+import json # used to send data back in JSON format
+import datetime # used to generate the system time
+# import database # used to interact with database
+import hashlib # used to cypt the password
+import verification
 
+# enable the cgi
 cgitb.enable()
 
-form = cgi.FieldStorage()
+login_form = cgi.FieldStorage()
 
+# check the validation of the username and password
+data = {}
+usrname = login_form["user_id"].value # get the username from the table
+pwd = login_form["password"].value # get the password from the table
+remember = login_form["remember_me"].value # get whether use status saving
+#
+print "Content-type: application/json"
 
-print 'Content-Type: text/html'
-print
+# print  # without printing a blank line, the "end of script output before headers" error will occur
+# if the remember me checkbox was clicled, set the cookie
 
-#USER ID
-user_id = form['user_id'].value
+# do some username & password verifications
+[stat, info] = verification.login_verify(usrname, pwd)
 
-#USER PASSPWORD
-password = form['password'].value
+if remember == "true":
+    # print "Hello, I send you a new cookie"
 
-database.create_table(database.create_user_table)
+    # correct password & username
+    if stat:
+        # create the cookie
+        cookie = Cookie.SimpleCookie()
+        # set the expire date
+        expires = datetime.datetime.utcnow() + datetime.timedelta(days=5)
+        cookie['user_name'] = usrname
+        cookie['password'] = pwd
+        cookie['user_name']['expires'] = expires.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
+        cookie['password']['expires'] = expires.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
+        data['user_name'] = usrname
 
-query = 'select password , salt from user_account where user_ID = \'%s\'' %user_id
-result = database.query_table(query)
+    data['result'] = info
+    # if cookie has been set
+    if cookie:
+        print cookie
+    print
+    print json.dumps(data)
 
-if result == None:
-	info = 'Sorry , we could find your user_ID'
+    # print json.dumps(data)
+
+# no cookie, user have to login again during the next visit
 else:
-	salt = result[1]
-	hasher = hashlib.md5()
-	hasher.update(str(password))
-	hasher.update(salt)
-	encrypted = hasher.hexdigest()
-	if encrypted == result[0]:
-		info = 'Congratulations, you have logged in'
-	else:
-		info = 'Wrong password'
+    # print "Hello, I won't send you a cookie."
+    if stat:
+        # create the cookie without expire
+        cookie = Cookie.SimpleCookie()
+        cookie['user_name'] = usrname
+        cookie['password'] = pwd
+        data['user_name'] = usrname
+        print cookie
+    
+    data['result'] = info
+    print
+    print json.dumps(data)
 
-	
-
-
-print '''
-<html>
-    <head>
-        <title>Created Account</title>
-    </head>
-    <body>
-    '''
-if info == 'Congratulations, you have logged in':
-	print '''
-        %s</br>
-        You will be redirected to the log_in html </br>
-        <meta http-equiv="refresh" content="2;url=../log_in.html">
-        '''%info
-else:
-	print '''
-        %s</br>
-        Please try again </br>
-        <meta http-equiv="refresh" content="2;url=../index.html">
-        '''%info
-print '''
-    </body>
-</html>''' 

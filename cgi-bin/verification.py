@@ -1,13 +1,11 @@
-#!/usr/bin/env python
-
-import database
+from userDBManager import query_user
 import hashlib
 
 def login_verify(username, password):
-	database.create_table(database.create_user_table)
+	#database.create_table(database.create_user_table)
 
-	query = 'select password , salt from user_account where user_ID = \'%s\'' %username
-	result = database.query_table(query)
+	query = 'select password , salt from user_account where user_ID = %s'
+	result = query_user(query, username)
 	stat = False
 	if result == None:
 		info = 'Wrong Username'

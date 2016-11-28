@@ -4,11 +4,10 @@
  * Javascript for Login page for cookie check
  * 
  */
-$(document).ready(function(){  
-     alert("Hello World");  
-     send_cookie();
-     $('#login_btn').click(login);
-     $('#logout').click(logout);
+$(document).ready(function(){
+     // send_cookie();
+     // $('#login_btn').click(login);
+     // $('#logout').click(logout);
      $('#signup_btn').click(signup);
 });  
 
@@ -24,8 +23,7 @@ var send_cookie = function () {
     //  success: a function to execute if the request is successful
     //  error: a function to execute if the request fails for any reason
     $.ajax({
-        url: '../cgi-bin/main_page_test.py',  // lecture 8 script to query the pizza database
-
+        url: '../cgi-bin/main_page.py',  // lecture 8 script to query the pizza database
         type: "POST",                  // GET or POST
 
         dataType: "json",             // json format
@@ -34,6 +32,7 @@ var send_cookie = function () {
           console.log("Send Cookie");
           console.log(data);
         	if (data.user_name != "nil") { // return a cookie
+            //success_handler(data)
             login_result = data.result;
             if (login_result == "success") {
               success_handler(data);
@@ -48,8 +47,6 @@ var send_cookie = function () {
         },
 
         error: function(request) {   // function to call when the request fails, other errors
-            console.log("Error!");
-            console.log(request);
             error_handler();
         }
     });
@@ -71,15 +68,15 @@ var login = function () {
 
   $.ajax({
 
-    url: "../cgi-bin/sign_in_test.py",
+    url: "../cgi-bin/sign_in.py",
 
     type: "POST",
 
     data: {
-      user_id: user_id,
-      password: pwd,
-      remember_me: remember
-    },
+            user_id: user_id,
+            password: pwd,
+            remember_me: remember
+          },
 
     // dataType: "json",
 
@@ -87,7 +84,7 @@ var login = function () {
     success: function (data) {
         console.log("Success Login");
         login_result = data.result;
-        // success_handler(data);
+        //success_handler(data);
         if (login_result == "success") {
           success_handler(data);
         }
@@ -108,6 +105,40 @@ var login = function () {
 // call when signup button clicked
 var signup = function() {
 
+  var username = $('#signup_username').val();
+  var password = $('#signup_password').val();
+  var re_password = $('#re_password').val();
+  var email = $('#signup_email').val();
+  var team;
+
+  if($('#team_mystic').val()!=""){
+    team="mystic";
+  }else if($('#team_valor').val()!=""){
+    team="valor";
+  }else if($('#team_instinct').val()!=""){
+    team="instinct";
+  }else if($('#team_undecide').val()!=""){
+    team="undecide";
+  }else{
+    team="";
+  }
+  console.log(team);
+
+  if(username==""||password==""||re_password==""||email==""||team==""){
+    $('#error_panel_signup').html("all content must be filled out")
+    return;
+  }
+  if(re_password!=password){
+    $('#error_panel_signup').html("Your two passwords must be the same")
+    return;
+  }
+  if(re_password==password){
+    $('#error_panel_signup').html("")
+  }
+  // if(!regular_exp.test(email)){
+  //   $('#error_panel_signup').html("your email style is not valid")
+  //   return;
+  // }
 }
 
 // when the user click the logout button on the screen
@@ -121,7 +152,7 @@ var logout = function() {
 
     $.ajax( {
 
-        url: "../cgi-bin/log_out_test.py",
+        url: "../cgi-bin/log_out.py",
 
         type: "POST",
 
@@ -136,7 +167,7 @@ var logout = function() {
         }
 
     });
-
+d
 }
 
 var success_handler = function(data) {
@@ -144,7 +175,7 @@ var success_handler = function(data) {
     console.log("success!");
     console.log(data);
     $('#home').html("<a>Home</a>");
-    $('#posts').html("<a href='#posts'>Posts</a>");
+    $('#posts').html("<a href='post.html'>Posts</a>");
     $('#pokemons').html("<a href='#pokemons'>Pokemon</a>");
     $('#profile').html("<a href='#profile'>Profile</a>");
     $('#logout').html("<a>Log Out</a>");
@@ -152,7 +183,6 @@ var success_handler = function(data) {
     $('#sign_in_btn').hide();
     $('#sign_up_btn').hide();
     $('#name_logo').html('Welcome! ' + data.user_name);
-
     // console.log(data.password)
 
 }
