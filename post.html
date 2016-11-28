@@ -10,11 +10,8 @@
 	<!-- load Flat-UI plugins -->
 	<link rel="stylesheet" type="text/css" href="./CSS/Flat-UI-master/dist/css/flat-ui.min.css">
 	<link href="./CSS/Flat-UI-master/dist/css/flat-ui.css" rel="stylesheet">
-	<!-- load jQuery -->
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="./bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body background="lightgrey">
 
 	<nav class="navbar navbar-inverse" role="navigation">
 	  <div class="navbar-header">
@@ -25,6 +22,7 @@
 	  </div>
 	  <div class="collapse navbar-collapse" id="navbar-collapse-01">
 	    <ul id="" class="nav navbar-nav">
+	      <li><a href="index.html">Home</a></li>
 	      <li class="active"><a href="#posts">Posts</a></li>
 	      <li><a href="#pokemons">Pokemons</a></li>
 	      <li><a href="#profile">Profile</a></li>
@@ -34,77 +32,93 @@
 	</nav><!-- /navbar -->
 
 	<div class="container">
-		<div class="row">
-			<div class="col-md-8" style="background-color: lightgrey">
-				<div class="row">
-					<div class="form-group">
-						<div class=" card card-header">
-							New Posts:
-						</div>
-						<div class="card card-block">
-							<p class="card-text">
-								<textarea class="form-control" id="new_posts" rows="2"></textarea>
-							</p>
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</div>
-					</div>
+      <div class="row">
+        <div class="col-sm-8 blog-main" style="background-color: lightgrey">
+			<div class="blog-post">
+				<!-- New Post input -->
+				<div>
+					<h4>New Post</h4>
+					<textarea class="form-control" rows="3"></textarea>
 				</div>
-				<div class="row">
-					<table border="0" style="word-break:break-all; word-wrap:break-all;">
-						<tr>
-							<td rowspan="2">
-								image
-							</td>
-							<td><b>username</b></td>
-						</tr>
-						<tr>
-							<td>date</td>
-						</tr>
-						<tr>
-							<td colspan="2"><p>PostsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafejpqrjemlaPostsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafejpqrjemlaPostsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafejpqrjemlaPostsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafejpqrjemlaPostsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafejpqrjemlaPostsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafejpqrjemlaPostsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafejpqrjemlaPostsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafejpqrjemla</p></td>
-						</tr>
-						<tr>
-							<td>
-								<div class = "col-md-6">
-									<button class="btn btn-primary">Like</button>
-								</div>
-							</td>
-							<td>
-								<div class="col-md-6">
-									<button class="btn btn-primary">Comment</button>	
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">Comment Detail</td>
-						</tr>
-					</table>
+		        <!-- New Post Modal -->
+				<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
+				    <div class="modal-dialog" role="document">
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				            <span aria-hidden="true">&times;</span>
+				          </button>
+				          <h4 class="modal-title">New Post</h4>
+				        </div>
+				        <div class="modal-body">
+				          <form>				       
+				            <div class="form-group">
+				              <label for="message-text" class="form-control-label">Posts:</label>
+				              <textarea class="form-control" id="post-text" rows="3"></textarea>
+				            </div>
+				          </form>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-primary" id="post-send" data-dismiss="modal">Submit</button>
+				        </div>
+				      </div>
+			    	</div>
 				</div>
-			</div>
-			<div class="col-md-4" style="background-color: lightblue">
-				<h4>Contact</h4>
-				<div class="row">
-					<div class="card card-block">
-						<p class="card-text">
-							<img src="./image/default_user.png">
-							<a href="name">Name</a>
-						</p>
+          	</div><!-- /.blog-post -->
+          	<!-- Posts Lists -->
+          	<br>
+          	<!-- A Post Demo -->
+           	<div class="panel panel-default">
+	          	<div class="panel-heading">
+	          		<button type="button" class="close" aria-label="Close">
+				            <span aria-hidden="true">&times;</span>
+				    </button>
+	          	</div>
+	    		<div class="panel-body">
+	    			<div class="media">
+					  <div class="media-left">
+					    <img src="image/default_user.png" class="media-object" style="width:60px">
+					  </div>
+					  <div class="media-body">
+					    <h4 class="media-heading">John Doe</h4>
+					    <p><small><i>Posted on June 6, 2016</i></small></p>
+					  </div>
+					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 					</div>
-					<div class="card card-block">
-						<p class="card-text">
-							<img src="./image/default_user.png">
-							<a href="name">Name</a>
-						</p>
-					</div>
-					<div class="card card-block">
-						<p class="card-text">
-							<img src="./image/default_user.png">
-							<a href="name">Name</a>
-						</p>
-					</div>
-				 </div><!--row-->
-			</div><!--col-md-4 -->
-		</div><!--row-->
-	</div><!--container-->
+	    		</div><!-- panel-body -->
+	    		<div class="panel-footer">
+	    			<button class="btn btn-primary" type="button" id="like_btn">Submit</button>
+	    			<label class="control-label" for="like_btn">10086</label>
+	    		</div>
+  			</div><!-- panel-default -->
+          	
+        </div><!-- /.blog-main -->
+        <!-- Contact List -->
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar" style="background-color: lightblue">
+          <div class="sidebar-module">
+            <h4>Contacts</h4>
+            <ol class="list-unstyled">
+              <li>
+              	<div class="media">
+				  <div class="media-left">
+				    <img src="image/default_user.png" class="media-object" style="width:30px">
+				  </div>
+				  <div class="media-body">
+				    <label><a>John Doe</a></label>
+				  </div>
+				</div>
+              </li>
+            </ol>
+          </div>
+       	</div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+	<!-- load jQuery -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="./bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+	<script src="js/post.js"></script>
 </body>
 </html>
