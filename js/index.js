@@ -5,9 +5,9 @@
  * 
  */
 $(document).ready(function(){
-     // send_cookie();
-     // $('#login_btn').click(login);
-     // $('#logout').click(logout);
+     send_cookie();
+     $('#login_btn').click(login);
+     $('#logout').click(logout);
      $('#signup_btn').click(signup);
 });  
 
@@ -73,9 +73,9 @@ var login = function () {
     type: "POST",
 
     data: {
-            user_id: user_id,
-            password: pwd,
-            remember_me: remember
+            'user_id':user_id,
+            'password':pwd,
+            'remember_me': remember
           },
 
     // dataType: "json",
@@ -104,41 +104,93 @@ var login = function () {
 
 // call when signup button clicked
 var signup = function() {
-
   var username = $('#signup_username').val();
+  var nickname = $('#signup_nickname').val();
   var password = $('#signup_password').val();
   var re_password = $('#re_password').val();
   var email = $('#signup_email').val();
   var team;
+  //var regular_exp=/\S+@\S+\.\S+/;
+  console.log("!!!!")
+  console.log(email);
+  //console.log(team);
 
-  if($('#team_mystic').val()!=""){
+  if(document.getElementById('team_mystic').checked){
+
     team="mystic";
-  }else if($('#team_valor').val()!=""){
+    //console.log(team);
+  }else if(document.getElementById('team_valor').checked){
     team="valor";
-  }else if($('#team_instinct').val()!=""){
+  }else if(document.getElementById('team_instinct').checked){
     team="instinct";
-  }else if($('#team_undecide').val()!=""){
+  }else if(document.getElementById('team_undecide').checked){
     team="undecide";
   }else{
     team="";
   }
-  console.log(team);
 
   if(username==""||password==""||re_password==""||email==""||team==""){
-    $('#error_panel_signup').html("all content must be filled out")
+    $('#error_panel_signup').html("all content must be filled out");
     return;
   }
-  if(re_password!=password){
-    $('#error_panel_signup').html("Your two passwords must be the same")
+
+  console.log(re_password);
+  console.log(password);
+
+  if(re_password != password){
+    $('#error_panel_signup').html("Your two passwords must be the same");
     return;
   }
   if(re_password==password){
-    $('#error_panel_signup').html("")
+    $('#error_panel_signup').html("");
+    
   }
   // if(!regular_exp.test(email)){
-  //   $('#error_panel_signup').html("your email style is not valid")
+  //   //console.log(regular_exp.test(email));
+  //   $('#error_panel_signup').html("your email style is not valid");
   //   return;
   // }
+
+  $.ajax({
+
+    url: "../cgi-bin/sign_up.py",
+
+    type: "POST",
+
+    data: {
+            user_id: username,
+            nickname: nickname,
+            password: password,
+            email: email,
+            team: team,
+          },
+
+    // dataType: "json",
+
+    // when successfully login
+    success: function (data) {
+        console.log("Success Login");
+        signup_result = data.result;
+        //success_handler(data);
+        if (signup_result == "success") {
+          alert("signup success!!");
+          // window.location.href = "index.html";
+          $("#signup_panel").hide();
+          success_handler(data);
+        }
+        else {
+           $('#error_panel_signup').html(data.result);
+          login_error(signup_result);
+        }
+    },
+
+    error: function (request,status, error) {
+        console.log("Error Login");
+        console.log(request);
+        console.log(error);
+        error_handler()
+    }
+  });
 }
 
 // when the user click the logout button on the screen
@@ -167,22 +219,24 @@ var logout = function() {
         }
 
     });
-d
 }
 
 var success_handler = function(data) {
-
+    // alert("!!!???s");
     console.log("success!");
     console.log(data);
     $('#home').html("<a>Home</a>");
     $('#posts').html("<a href='post.html'>Posts</a>");
     $('#pokemons').html("<a href='#pokemons'>Pokemon</a>");
-    $('#profile').html("<a href='#profile'>Profile</a>");
+    $('#profile').html("<a href='change.html'>Profile</a>");
     $('#logout').html("<a>Log Out</a>");
     // $('#login_panel').empty();
     $('#sign_in_btn').hide();
     $('#sign_up_btn').hide();
     $('#name_logo').html('Welcome! ' + data.user_name);
+    //$('#login_panel').hide();
+    //display post field by Ma Jinjian
+    //$('#post-field').css("display","block")
     // console.log(data.password)
 
 }

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!C:\Users\nevgivin\Anaconda2\python.exe
 
 import cgitb
 import cgi

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to Pokemon World!</title>
+	<link rel="stylesheet" type="text/css" href="./CSS/index.css">
+	<!-- load jQuery -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- include JS -->
+    <script type="text/javascript" src="./js/index.js"></script>
+
+    <!-- include profile -->
+    <script src = "./js/profile.js"></script>
+</head>
+<body>
+	<ul id="navigation_bar">
+	  	<li id="home1"><a href="index.html">Home</a></li>
+	  	<li id="news"></li>
+	  	<li id="pokemon"></li>
+	  	<!-- <li id="contact"></li>
+	  	<li id="profile"></li>
+	  	<li id="logout"></li> -->
+	  	<li style="float:right" id="signup"></li>
+	  	<li style="float:right" id="login"></li>
+	  	<li style="float:right" id="name_logo"></li>
+	</ul>
+	<div>
+		<img src="./image/index.jpg" width="100%" height="20%">
+		<div id="profile_login_panel" style="display: block;">
+			<div style="position:absolute; left:30%; top:35%; width:40%; height:50%; background-color:#FFF;opacity: 0.9;"> 
+			  
+			   <table border="0" align="center">
+			   	<tr>
+			   		<td colspan="2" align="center"><img width="30%" height="30%" src="./image/mystic.jpg"/></td>
+			   	</tr>
+			   	<!-- <tr>
+			   		<td align="right">reset user profile:</td><td><input type="button" value="reset" onclick="show();"/></td>
+			   	</tr> -->
+			   </table>
+			   	<div method="post" action="" >
+			   		<div style="display:block" id="showTable">
+			   			<table border="0" align="center">
+			   				<tr>
+			   					<td>userID:</td><td><input type="text" id = "profile_username" name="profile_username"
+			   					disabled="true" /></td>
+			   				</tr>
+			   				<tr>
+			   					<td>nickname:</td><td><input type="text" id = "profile_nickname" name="profile_nickname"/></td>
+			   				</tr>
+			   				<tr>
+			   					<td>email:</td><td><input type="text" id="profile_email_address" name="profile_email_address"/></td>
+			   				</tr>
+			   				<!-- <tr>
+			   					<td>team:</td><td><input type="text" name="team"/></td>
+			   				</tr> -->
+			   				<tr align="center">
+			   					<!-- <td colspan="2"><input id = "profile_change" type="submit" value="modify"/></td> -->
+			   					<td><input type='button' onclick='update()' value='modify'></td>
+
+			   					<td><input type='button' onclick='prom()' value='password'></td>
+			   				</tr>
+			            </table>
+			        </div>
+			    </div>
+			</div> 
+		</div>
+		<!-- <div style="position:absolute; left:20%; top:25%; width:60%; height:50%; background-color:#FFF;opacity: 0.9;"> 
+
+		</div>  -->
+	</div>
+</body>
+</html>

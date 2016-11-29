@@ -1,6 +1,6 @@
 import pymysql
 
-dbpass = '931119ma'
+dbpass = 'mysql'
 dbuser = 'root'
 dbhost = 'localhost'
 dbname = 'web_pokemon'

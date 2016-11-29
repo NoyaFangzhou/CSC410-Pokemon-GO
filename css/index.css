@@ -4,7 +4,10 @@
 
 /*
 	All submit, reset and button element
-*/ 
+*/
+
+/** original submit style commented by Ma Jinjian**/
+/*
 button, input[type=submit] {
 	background-color: #2794E3;
 	border: none;
@@ -16,6 +19,7 @@ button, input[type=submit] {
 	font-size: 18px;
 	display: inline-block; 
 }
+*/
 
 /*
 	All submit, reset and button element, when we move the mouse on these element
@@ -55,3 +59,39 @@ li a:hover:not(.active) {
 .active {
     background-color: #2794E3;
 }
+
+
+/** test code Ma Jinjian **/
+#Login {
+    background-color: #2794E3;
+    border: none;
+    color: white;
+    padding: 1% 5%;
+    margin-left: 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    display: inline-block; 
+}
+
+#send-bar {
+    position: fixed;
+    left: 30%;
+    height: 13%;
+}
+
+textarea {
+    position: 
+    height: 100%;
+}
+
+#posts {
+    position: fixed;
+    left: 15%;
+    height: 100%;
+    width: 65%;
+    top: 20%;
+    border: solid;
+}
+
+/** end of test code Ma Jinjian **/

@@ -25,7 +25,7 @@
 	      <li><a href="index.html">Home</a></li>
 	      <li class="active"><a href="#posts">Posts</a></li>
 	      <li><a href="#pokemons">Pokemons</a></li>
-	      <li><a href="#profile">Profile</a></li>
+	      <li><a href="change.html">Profile</a></li>
 	    </ul>
 	    <p class="navbar-text navbar-right">Welcome! Sommoner</p>
 	  </div><!-- /.navbar-collapse -->
@@ -38,7 +38,7 @@
 				<!-- New Post input -->
 				<div>
 					<h4>New Post</h4>
-					<textarea class="form-control" rows="3"></textarea>
+					<textarea class="form-control" rows="3" id="new_posts"></textarea>
 				</div>
 		        <!-- New Post Modal -->
 				<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -67,7 +67,9 @@
           	</div><!-- /.blog-post -->
           	<!-- Posts Lists -->
           	<br>
-          	<!-- A Post Demo -->
+          	<div id="posts">
+          	</div>
+          	<!-- A Post Demo 
            	<div class="panel panel-default">
 	          	<div class="panel-heading">
 	          		<button type="button" class="close" aria-label="Close">
@@ -85,13 +87,13 @@
 					  </div>
 					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 					</div>
-	    		</div><!-- panel-body -->
+	    		</div>
 	    		<div class="panel-footer">
 	    			<button class="btn btn-primary" type="button" id="like_btn">Submit</button>
 	    			<label class="control-label" for="like_btn">10086</label>
 	    		</div>
-  			</div><!-- panel-default -->
-          	
+  			</div> panel-default -->
+
         </div><!-- /.blog-main -->
         <!-- Contact List -->
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar" style="background-color: lightblue">

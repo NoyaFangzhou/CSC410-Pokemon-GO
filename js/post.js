@@ -29,11 +29,6 @@ $.ajax({
 	}
 });
 
-
-$('#new_post').focus(function() {
-	console.log("focus");
-	show_posts();
-});
 /**
  * retrieve posts when load page
  */
@@ -45,18 +40,28 @@ function retrieve_posts() {
 
 		dataType: "json",
 
+		data: "retrieve=true",
+
 		success: function(data) {
-			posts = JSON.parse(data);
-			if(posts.length > 0) {
-				posts.forEach(function(element){
-					post_array.push(element);
-				});
-				display_posts();
+			if(data.result != 'failed') {
+				if(JSON.stringify(data) != '{}'){
+					posts = JSON.parse(data);
+					if(posts.length > 0) {
+						posts.forEach(function(element){
+							post_array.push(element);
+						});
+						display_posts();
+					}
+				}
 			}
+			else {
+				alert("server error")
+			}
+			
 		},
 
 		error: function(data) {
-			alert(data);
+			alert("request failed");
 		}
 	});
 }
@@ -79,13 +84,18 @@ $("#post-send").click(function() {
 
 		dataType: "json",
 		success: function(data) {
-			insertpost = render_post(data);
-			$("#posts").prepend(insertpost);
-			post_array.push(data);
+			if(data.result == 'succeed') {
+				insertpost = render_post(data);
+				$("#posts").prepend(insertpost);
+				post_array.push(data);
+			}
+			else {
+				alert("server error");
+			}
 		},
 
 		error: function(data) {
-			alert("failed");
+			alert("request failed");
 			console.log(data);
 		}
 	});
@@ -94,13 +104,65 @@ $("#post-send").click(function() {
 /**
  * delete_post - delete a post
  */
-function delete_post() {
+function delete_post(post_id) {
 	$.ajax({
-		url: "/cgi-bin/"
+		url: "/cgi-bin/postHandler.py",
+
+		type: "POST",
+
+		data: "delete=true&id=" + post_id,
+
+		dataType: "json",
+
+		success: function(data) {
+			if(data.result == 'succeed') {
+				$("#user-post"+post_id.toString()).remove();
+			}
+			else {
+				alert("server error")
+			}
+		},
+
+		error: function(data) {
+			alert("server error");
+			console.log(data);
+		}
 
 	});
 }
 
+/**
+ * like_post - like a post
+ */
+ function like_post(post_id) {
+ 	$.ajax({
+		url: "/cgi-bin/postHandler.py",
+
+		type: "POST",
+
+		data: "like=true&id=" + post_id,
+
+		dataType: "json",
+
+		success: function(data) {
+			if(data.result == 'succeed') {
+				old_likes = parseInt($("#"+post_id).text());
+
+				$("#"+post_id).text(++old_likes);
+
+			}
+			else {
+				alert("server error")
+			}
+		},
+
+		error: function(data) {
+			alert("server error");
+			console.log(data);
+		}
+
+	});
+ }
 
 
 /**
@@ -113,13 +175,42 @@ function delete_post() {
  	});
  }
 
+
 /**
  * render_post - form post data into html fashion
  * return: html string
  */
  function render_post(post_data) {
- 	insertpost = "<div id='user-post' class='row'>" +
+
+ 	insertpost = "<div class='panel panel-default' id=user-post"+ post_data.id +">" +
+	          		"<div class='panel-heading'>" +
+	          			"<button type='button' class='close' aria-label='Close'" + 
+	          			" onclick='delete_post(" + post_data.id + ")'" + ">" +
+				            	"<span aria-hidden='true'>&times;</span>" +
+				    	"</button>" +
+	          		"</div>" +
+	    			" <div class='panel-body'>" +
+		    			"<div class='media'>" +
+						  "<div class='media-left'>" + 
+						    "<img src='image/default_user.png' class='media-object' style='width:60px'>" +
+						  "</div>" +
+						  "<div class='media-body'>" +
+						    "<h4 class='media-heading'>" + post_data.author + "</h4>" + 
+						    "<p><small><i>Posts on " + post_data.date +"</i></small></p>" +
+						  "</div>"+
+						  "<p>" + post_data.content + "</p>" +
+						"</div>" +
+		    		"</div><!-- panel-body -->" +
+			    		"<div class='panel-footer'>" +
+			    			"<button class='btn btn-primary' type='button' id='like_btn' onclick='like_post(" + 
+			    					post_data.id + ")'>Like</button>" +
+			    			"<label class='control-label' for='like_btn' id="+ post_data.id +">"+ post_data.likes +"</label>" +
+			    		"</div>" + 
+	  				"</div><!-- panel-default -->";
+
+ 	/*insertpost = "<div id='user-post" + post_data.id + "' class='row'>" +
  						"<table border='0' style='word-break:break-all; word-wrap:break-all;'>" +
+ 							"<a onclick='delete_post(" + post_data.id + ")'>" + "x" + "</a>" + 
  							"<tr>" +
  								"<td rowspan='2'>" +
  									"image" +
@@ -139,7 +230,7 @@ function delete_post() {
 							"<tr>" +
 								"<td>" +
 									"<div class = 'col-md-6'>" +
-										"<button class='btn btn-primary'>" +
+										"<button class='btn btn-primary' onclick='like_post(" + post_data.id + ")'>" +
 											"Like" +
 										"</button>" +
 									"</div>" +
@@ -159,5 +250,6 @@ function delete_post() {
 							"</tr>" +
 						"</table>" +
 					"</div>";
+		*/
 	return insertpost;
  }

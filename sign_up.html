@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up! Sommoners!</title>
+	<h1> Please Type Your Information </h1>
+	<link rel="stylesheet" type="text/css" href="./CSS/sign_up.css">
+</head>
+<body>
+<form method="POST" action="/cgi-bin/sign_up.py">
+	<br>
+	<p>
+		<div>
+			User Name:
+			<input type="text" name="user_id"><br>
+		</div>
+		<div>
+			Nick Name:
+			<input type="text" name="nickname">
+		</div>
+		<div>
+			Password:
+			<input type="password" name="password">
+		</div>
+		<div>
+			Retype Password:
+			<input type="password" name="re_password">
+		</div>
+		<div>
+			E-mail:
+			<input type="text" name="email">
+		</div>
+		<div>
+			Team:<br>
+			<table>
+				<tr>
+					<th>
+						<label for="team_mystic"><img src="./image/mystic.jpg" style="width: 128px;height:128px"></label>
+						<input type="radio" name="team" value="mystic" id="team_mystic">
+					</th>
+					<th>
+						<label for="team_valor"><img src="./image/valor.jpg" style="width: 128px;height: 128px"></label>
+						<input type="radio" name="team" value="valor" id="team_valor">
+					</th>
+					<th>
+						<label for="team_instinct"><img src="./image/instinct.jpg" style="width: 128px;height: 128px"></label>
+						<input type="radio" name="team" value="instinct" id="team_instinct">
+					</th>
+					<th>
+						<label for="team_undecide"><img src="./image/undecide.jpg" style="width: 128px;height: 128px"></label>
+						<input type="radio" name="team" value="undecide" id="team_undecide">
+					</th>
+				</tr>
+				<tr>
+					<th>Team Mystic</th>
+					<th>Team Valor</th>
+					<th>Team Instinct</th>
+					<th>Team Un Decide</th>
+				</tr>
+			</table>
+		</div>
+	</p>
+	
+	<p>
+		<input type="submit" class="submit_press" value="Sign Up">
+		<input type="reset" class="submit_press" value="Reset">
+	</p>
+
+</form>
+</body>
+</html>

@@ -6,8 +6,7 @@ def query_user(sql_query, username):
 		return 'Error'
 	try:
 		with con.cursor() as cursor:
-			cursor.execute(sql_query,(username));
-			con.commit()
+			cursor.execute(sql_query,(username,));
 			result = cursor.fetchone()
 			con.close()
 			return result
@@ -17,13 +16,13 @@ def query_user(sql_query, username):
 		return 'Error'
 
 
-def create_user(sql_insert,user_id,encrypted,nickname,salt):
+def create_user(sql_insert,user_id,encrypted,nickname,salt,email_address, team):
 	con = connect()
 	if con == None:
 		return 'Error'
 	try:
 		with con.cursor() as cursor:
-			s = cursor.execute(sql_insert,(user_id,encrypted,nickname,salt));
+			s = cursor.execute(sql_insert,(user_id,encrypted,nickname,salt,email_address,team));
 			con.commit()
 			con.close()
 			return True
