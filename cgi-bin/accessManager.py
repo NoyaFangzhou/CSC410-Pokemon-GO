@@ -1,4 +1,4 @@
-#!C:\Users\nevgivin\Anaconda2\python.exe
+#! /usr/bin/python
 import cgitb
 import cgi
 import Cookie

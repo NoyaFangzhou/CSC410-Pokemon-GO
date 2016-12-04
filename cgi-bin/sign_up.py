@@ -1,4 +1,4 @@
-#!C:\Users\nevgivin\Anaconda2\python.exe
+#! /usr/bin/python
 
 import cgi
 import cgitb
@@ -9,15 +9,14 @@ import json
 import Cookie
 import os
 
+
 cgitb.enable()
+
+##http response
+print 'Content-Type: application/json'
 
 form = cgi.FieldStorage()
 
-#EMAIL
-email_address = form['email'].value
-
-#Team
-team = form['team'].value
 
 #USER ID
 user_id = form['user_id'].value
@@ -28,10 +27,14 @@ nickname = form['nickname'].value
 #USER PASSPWORD
 password = form['password'].value
 
+#email
+email = form['email'].value
+
+#team
+team = form['team'].value
+
 #SALT
 salt = str(datetime.datetime.now())
-
-
 
 #ENCRYPTED PASSWORD
 hasher = hashlib.md5()
@@ -40,6 +43,7 @@ hasher.update(salt)
 encrypted = hasher.hexdigest()
 
 return_data = {}
+info = '';
 
 detect_exist = 'select * from user_account where user_ID = %s'
 
@@ -49,31 +53,20 @@ exist = userDBManager.query_user(detect_exist, user_id)
 if exist != None:
 	info = 'Sorry, the user_ID has existed , please try another one'
 else:
-	sql = 'INSERT INTO user_account (user_ID , password , nickname , salt ,email_address , team) VALUES (%s, %s, %s, %s , %s , %s)'
-	insert = userDBManager.create_user(sql,user_id,encrypted,nickname,salt,email_address,team)
+	sql = 'INSERT INTO user_account (user_ID , password , nickname , salt, email_address, team) VALUES (%s, %s, %s, %s, %s, %s)'
+	insert = userDBManager.create_user(sql,user_id,encrypted,nickname,salt,email,team)
 	if not insert:
 		info = 'An error occur when trying to insert your application to the database'
 	else:
+		cookie = Cookie.SimpleCookie()
+		cookie['user_name'] = user_id
+		cookie['password'] = password
 		info = 'success'
+		print cookie
+		return_data['user_name'] = user_id
 
 return_data['result'] = info
 
-
-# create the cookie
-cookie = Cookie.SimpleCookie()
-# set the expire date
-
-expires = datetime.datetime.utcnow() + datetime.timedelta(days=5)
-cookie['user_name'] = user_id
-cookie['password'] = password
-cookie['user_name']['expires'] = expires.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
-cookie['password']['expires'] = expires.strftime("%a, %d-%b-%Y %H:%M:%S GMT")
-return_data['user_name'] = user_id
-
-##http response
-print 'Content-Type: application/json'
-if cookie and info == 'success':
-	print cookie
 print
 print json.dumps(return_data)
 #MiniFieldStorage

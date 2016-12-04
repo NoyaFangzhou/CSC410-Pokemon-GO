@@ -73,9 +73,9 @@ var login = function () {
     type: "POST",
 
     data: {
-            'user_id':user_id,
-            'password':pwd,
-            'remember_me': remember
+            user_id: user_id,
+            password: pwd,
+            remember_me: remember
           },
 
     // dataType: "json",
@@ -87,6 +87,7 @@ var login = function () {
         //success_handler(data);
         if (login_result == "success") {
           success_handler(data);
+          $("#login_panel").hide();
         }
         else {
           login_error(login_result);
@@ -111,8 +112,7 @@ var signup = function() {
   var email = $('#signup_email').val();
   var team;
   //var regular_exp=/\S+@\S+\.\S+/;
-  console.log("!!!!")
-  console.log(email);
+
   //console.log(team);
 
   if(document.getElementById('team_mystic').checked){
@@ -161,8 +161,8 @@ var signup = function() {
             user_id: username,
             nickname: nickname,
             password: password,
-            email: email,
             team: team,
+            email: email
           },
 
     // dataType: "json",
@@ -173,14 +173,12 @@ var signup = function() {
         signup_result = data.result;
         //success_handler(data);
         if (signup_result == "success") {
-          alert("signup success!!");
-          // window.location.href = "index.html";
           $("#signup_panel").hide();
           success_handler(data);
         }
         else {
-           $('#error_panel_signup').html(data.result);
-          login_error(signup_result);
+          signup_error(signup_result);
+          //$('#error_panel_signup').html(data.result);
         }
     },
 
@@ -222,7 +220,7 @@ var logout = function() {
 }
 
 var success_handler = function(data) {
-    // alert("!!!???s");
+
     console.log("success!");
     console.log(data);
     $('#home').html("<a>Home</a>");
@@ -248,7 +246,7 @@ var login_error = function(err_msg) {
 
 var signup_error = function(err_msg) {
   error_handler();
-    $('#error_panel_signup').html(err_msg);
+  $('#error_panel_signup').html(err_msg);
 }
 
 

@@ -1,4 +1,4 @@
-#!C:\Users\nevgivin\Anaconda2\python.exe
+#!/usr/bin/python
 
 # use cookie for persistant data storage
 # if no cookie, return the login page

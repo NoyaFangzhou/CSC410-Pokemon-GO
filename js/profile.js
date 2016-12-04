@@ -66,28 +66,27 @@ function update()
 
 
 function prom() {  
-        var name = prompt("Please type your new password", "");   
-        
-        $.ajax({
-          url: "../cgi-bin/profile.py",
+  var name = prompt("Please type your new password", "");   
+  if(name != null) {
+    $.ajax({
+      url: "../cgi-bin/profile.py",
 
-          type: "POST",
+      type: "POST",
 
-          data: "change_password="+name,
+      data: "change_password="+name,
 
-          dataType: "json",
+      dataType: "json",
 
-          success:function(data){
-            alert("Password modified successfully!");
-          },
+      success:function(data){
+        alert("Password modified successfully!");
+      },
 
-          error:function(data){
-            alert("Password modified fail");
-          }
-        });
-      
-  
-    }  
+      error:function(data){
+        alert("Password modified fail");
+      }
+    });
+  }
+}  
 
 
 
