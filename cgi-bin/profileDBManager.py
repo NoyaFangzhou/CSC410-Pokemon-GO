@@ -2,7 +2,6 @@ import pymysql
 from dbconnector import connect
 from datetime import datetime
 
-
 def update(user_ID , post_data):
 	update_sql = 'UPDATE user_account set nickname = %s , email_address = %s where user_ID = %s'
 
@@ -27,10 +26,8 @@ def update(user_ID , post_data):
 		con.close()
 		return False
 
-
-
 def change_password(user_ID, password , salt):
-
+    
 	insert_sql = 'UPDATE user_account SET password = %s , salt = %s where user_ID = %s'
 
 

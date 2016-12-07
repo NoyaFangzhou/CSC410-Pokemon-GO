@@ -1,0 +1,7 @@
+CREATE TABLE user_follow
+(
+	ID int NOT NULL AUTO_INCREMENT,
+	user_follower int,
+	user_followed int,
+	PRIMARY KEY (ID)
+);

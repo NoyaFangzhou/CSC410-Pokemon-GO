@@ -6,13 +6,15 @@ import os
 import json
 import hashlib
 import profileDBManager
+from verification import login_verify
+
 from datetime import datetime
 
 cgitb.enable()
 ##http response
 print "Content-type: application/json"
 print
-##global variables
+#global variables
 username = None
 return_data = {}
 update = {}
@@ -26,33 +28,38 @@ username = cookie['user_name'].value
 
 
 
-##retrieve post parameter
+#retrieve post parameter
 post_form = cgi.FieldStorage()
 
 if post_form.getvalue('modify') != 'False':
-	if post_form.getvalue('change_password'):	
-		
-		password = post_form.getvalue('change_password')
-
-		#SALT
-		salt = str(datetime.now())
-
-		#ENCRYPTED PASSWORD
-		hasher = hashlib.md5()
-		
-		hasher.update(str(password))
-		hasher.update(salt)
-		
-		encrypted = hasher.hexdigest()
-		if profileDBManager.change_password(username , encrypted , salt):
-			status['status'] = 'true'
-		else:
+	if post_form.getvalue('change_password') == 'True':
+		# print "!"
+		old = post_form.getvalue('old_password')
+		password = post_form.getvalue('new_password')
+		[stat,info] = login_verify(username, old)
+		if stat == False:
 			status['status'] = 'false'
-		print json.dumps(status)
+			status['info'] = info
+			print json.dumps(status)
+		else:
+			#SALT
+			salt = str(datetime.now())
+
+			#ENCRYPTED PASSWORD
+			hasher = hashlib.md5()
+		
+			hasher.update(str(password))
+			hasher.update(salt)
+		
+			encrypted = hasher.hexdigest()
+			if profileDBManager.change_password(username , encrypted , salt):
+				status['status'] = 'true'
+			else:
+				status['status'] = 'false'
+			print json.dumps(status)
 	else:
 		update['nickname'] = post_form.getvalue('nickname')
 		update['email_address'] = post_form.getvalue('email_address')
-		# update['team'] = post_form['team'].value
 
 		if profileDBManager.update(username , update):
 			status['status'] = 'true'
@@ -64,5 +71,4 @@ if post_form.getvalue('modify') != 'False':
 else:
 	profile = profileDBManager.query_profile(username)
 	return_data = json.dumps( profile )
-# print return_data
 	print json.dumps(return_data)

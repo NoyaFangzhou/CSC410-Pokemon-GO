@@ -13,6 +13,7 @@ $(document).ready(function(){
 
 
 
+
 // send the cookie to the server before the page was loaded
 // 
 var send_cookie = function () {
@@ -73,9 +74,9 @@ var login = function () {
     type: "POST",
 
     data: {
-            user_id: user_id,
-            password: pwd,
-            remember_me: remember
+            'user_id':user_id,
+            'password':pwd,
+            'remember_me': remember
           },
 
     // dataType: "json",
@@ -87,7 +88,7 @@ var login = function () {
         //success_handler(data);
         if (login_result == "success") {
           success_handler(data);
-          $("#login_panel").hide();
+          $("#login_panel").modal('toggle');
         }
         else {
           login_error(login_result);
@@ -112,7 +113,6 @@ var signup = function() {
   var email = $('#signup_email').val();
   var team;
   //var regular_exp=/\S+@\S+\.\S+/;
-
   //console.log(team);
 
   if(document.getElementById('team_mystic').checked){
@@ -143,7 +143,6 @@ var signup = function() {
   }
   if(re_password==password){
     $('#error_panel_signup').html("");
-    
   }
   // if(!regular_exp.test(email)){
   //   //console.log(regular_exp.test(email));
@@ -161,8 +160,8 @@ var signup = function() {
             user_id: username,
             nickname: nickname,
             password: password,
+            email: email,
             team: team,
-            email: email
           },
 
     // dataType: "json",
@@ -173,10 +172,11 @@ var signup = function() {
         signup_result = data.result;
         //success_handler(data);
         if (signup_result == "success") {
-          $("#signup_panel").hide();
+          $("#signup_panel").modal('toggle');
           success_handler(data);
         }
         else {
+          $('#error_panel_signup').html(data.result);
           signup_error(signup_result);
           //$('#error_panel_signup').html(data.result);
         }
@@ -220,13 +220,14 @@ var logout = function() {
 }
 
 var success_handler = function(data) {
-
+    // alert("!!!???s");
     console.log("success!");
     console.log(data);
     $('#home').html("<a>Home</a>");
     $('#posts').html("<a href='post.html'>Posts</a>");
-    $('#pokemons').html("<a href='#pokemons'>Pokemon</a>");
+    $('#pokemons').html("<a href='http://www.pokemongo.com/en/'>Pokemon</a>");
     $('#profile').html("<a href='change.html'>Profile</a>");
+    $('#search').html("<a href='search.html'>Search</a>");
     $('#logout').html("<a>Log Out</a>");
     // $('#login_panel').empty();
     $('#sign_in_btn').hide();
@@ -255,9 +256,11 @@ var error_handler = function() {
     $('#posts').empty();
     $('#pokemons').empty();
     $('#profile').empty();
+    $('#search').empty();
     $('#logout').empty();
      // $('#login').html("<a href='../sign_in.html'>Log In</a>"); 
     $('#sign_in_btn').show();
     $('#sign_up_btn').show();      
     $('#name_logo').html("Welcome! Sommoner");
 }
+

@@ -1,7 +1,12 @@
 
 
 $(document).ready(function(){
+
+
      load_profile();
+
+     $('#modify_btn').click(update);
+     $('#password_submit').click(modify_pwd);
      // $('#home').html("<a href='main_page.html'></a>");
 });  
 /**
@@ -18,6 +23,7 @@ function load_profile() {
     dataType: "json",
 
     success: function(data) {
+      // alert(data);
       // console.log("ajax");
       // console.log(data);
       var t = JSON.parse(data);
@@ -34,7 +40,7 @@ function load_profile() {
     },
 
     error: function(data) {
-      alert("fail");
+      alert("load data error");
       // alert(stringify(data));
     }
   });
@@ -49,7 +55,7 @@ function update()
 
         type: "POST",
 
-        data: "modify = True&email_address=" +$("#profile_email_address").val()+ "&nickname="+$("#profile_nickname").val(),
+        data: "modify=True&email_address=" +$("#profile_email_address").val()+ "&nickname="+$("#profile_nickname").val(),
 
         dataType: "json",
 
@@ -58,6 +64,7 @@ function update()
         },
 
         error:function(data){
+          console.log(data)
           alert("modify fail");
         }
 
@@ -65,28 +72,82 @@ function update()
     }
 
 
-function prom() {  
-  var name = prompt("Please type your new password", "");   
-  if(name != null) {
+// function prom() {  
+
+//   var name = prompt("Please type your new password", "");   
+//   if(name != null) {
+//     $.ajax({
+//       url: "../cgi-bin/profile.py",
+
+//       type: "POST",
+
+//       data: "change_password="+name,
+
+//       dataType: "json",
+
+//       success:function(data){
+//         alert("Password modified successfully!");
+//       },
+
+//       error:function(data){
+//         alert("Password modified fail");
+//       }
+//     });
+
+// }  
+
+function modify_pwd() {  
+
+    var old_pwd = $('#old_password').val();
+    var new_pwd = $('#new_password').val();
+    var re_new_pwd = $('#re_new_password').val();
+
+    console.log(old_pwd);
+    console.log(new_pwd);
+    console.log(re_new_pwd);
+    if (old_pwd == "" || new_pwd == "" || re_new_pwd == "") {
+      $('#error_panel_modify').html("Should fill all table");
+      return;
+    }
+    if (new_pwd != re_new_pwd) {
+      $('#error_panel_modify').html("New Password not match");
+      return;
+    }
+    if (new_pwd == old_pwd) {
+      $('#error_panel_modify').html("No difference between new and old Password");
+      return;
+    }
+    
     $.ajax({
       url: "../cgi-bin/profile.py",
 
       type: "POST",
 
-      data: "change_password="+name,
+      data: {
+        change_password: 'True',
+        old_password: old_pwd,
+        new_password: new_pwd,
+      },
 
       dataType: "json",
 
       success:function(data){
-        alert("Password modified successfully!");
+
+        if(data.status == "false"){
+              $('#error_panel_modify').html("password error");
+          }
+        else{
+            alert("Password modified successfully!");
+            $("#change_pwd_modal").hide();
+        }
       },
 
       error:function(data){
-        alert("Password modified fail");
+        alert("Password modified failed!");
       }
     });
-  }
-}  
+
+}
 
 
 

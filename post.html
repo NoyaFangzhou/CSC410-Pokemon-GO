@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home Pokemon Go!</title>
+	<title>Welcome to Pokemon World!</title>
 		<!-- device dependent -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- load bootstrap framework -->
 	<link rel="stylesheet" type="text/css" href="./bootstrap-3.3.0/dist/css/bootstrap.min.css">
+	<!-- Load ico image icon -->
+	<link rel="icon" href="image/ico/pikachu.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="image/ico/pikachu.ico" type="image/x-icon" />
 	<!-- <link href="./CSS/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 	<!-- load Flat-UI plugins -->
 	<link rel="stylesheet" type="text/css" href="./CSS/Flat-UI-master/dist/css/flat-ui.min.css">
 	<link href="./CSS/Flat-UI-master/dist/css/flat-ui.css" rel="stylesheet">
+
+
 </head>
 <body background="lightgrey">
 
@@ -18,16 +23,16 @@
 	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
 	      <span class="sr-only">Toggle navigation</span>
 	    </button>
-	    <a class="navbar-brand" href="#">Pokemon Go!</a>
+	    <a class="navbar-brand" href="index.html">Pokemon Go!</a>
 	  </div>
 	  <div class="collapse navbar-collapse" id="navbar-collapse-01">
 	    <ul id="" class="nav navbar-nav">
 	      <li><a href="index.html">Home</a></li>
-	      <li class="active"><a href="#posts">Posts</a></li>
-	      <li><a href="#pokemons">Pokemons</a></li>
+	      <li class="active"><a>Posts</a></li>
+	      <li><a href="http://www.pokemongo.com/en/">Pokemons</a></li>
 	      <li><a href="change.html">Profile</a></li>
+	      <li><a href="search.html">Search</a></li>
 	    </ul>
-	    <p class="navbar-text navbar-right">Welcome! Sommoner</p>
 	  </div><!-- /.navbar-collapse -->
 	</nav><!-- /navbar -->
 
@@ -38,7 +43,7 @@
 				<!-- New Post input -->
 				<div>
 					<h4>New Post</h4>
-					<textarea readonly class="form-control" rows="3" id="new_posts"></textarea>
+					<textarea class="form-control" rows="3" id="new_posts" style="resize: none;"></textarea>
 				</div>
 		        <!-- New Post Modal -->
 				<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -51,15 +56,25 @@
 				          <h4 class="modal-title">New Post</h4>
 				        </div>
 				        <div class="modal-body">
-				          <form>				       
+				          <form>	
+				          	<div id="error_panel_post" class="alert alert-danger" role="alert"></div>
+				          	<div class="form-group">
+				          		<label for="post-img" class="form-control-label">Image:</label>
+				          		<input type="file" id="post-img" data-buttonText="Choose Image" buttonName="btn-primary" data-placeholder = "Please select a picture you'd like to add to your post~" class="filestyle">
+					            <!-- <label class="btn btn-primary btn-file" id="post-img">
+									Choose Image <input type="file" style="display: none;">
+								</label> -->
+				              <!-- <textarea class="form-control" id="post-text" rows="3"></textarea> -->
+				            </div>			       
 				            <div class="form-group">
-				              <label for="message-text" class="form-control-label">Posts:</label>
-				              <textarea class="form-control" id="post-text" rows="3"></textarea>
+				              <label for="post-text" class="form-control-label">Posts:</label>
+				              <textarea class="form-control" id="post-text" rows="3" style="resize: none;"></textarea>
 				            </div>
 				          </form>
 				        </div>
 				        <div class="modal-footer">
-				          <button type="button" class="btn btn-primary" id="post-send" data-dismiss="modal">Submit</button>
+				          <button type="button" class="btn btn-primary" id="post-send">Submit</button>
+						  <button type="button" class="btn btn-primary" id="pic-clear" >Clear</button>
 				        </div>
 				      </div>
 			    	</div>
@@ -68,49 +83,37 @@
           	<!-- Posts Lists -->
           	<br>
           	<div id="posts">
-          	</div>
-          	<!-- A Post Demo 
-           	<div class="panel panel-default">
-	          	<div class="panel-heading">
-	          		<button type="button" class="close" aria-label="Close">
-				            <span aria-hidden="true">&times;</span>
-				    </button>
-	          	</div>
-	    		<div class="panel-body">
-	    			<div class="media">
-					  <div class="media-left">
-					    <img src="image/default_user.png" class="media-object" style="width:60px">
-					  </div>
-					  <div class="media-body">
-					    <h4 class="media-heading">John Doe</h4>
-					    <p><small><i>Posted on June 6, 2016</i></small></p>
-					  </div>
-					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-	    		</div>
-	    		<div class="panel-footer">
-	    			<button class="btn btn-primary" type="button" id="like_btn">Submit</button>
-	    			<label class="control-label" for="like_btn">10086</label>
-	    		</div>
-  			</div> panel-default -->
 
+	          	<!-- <div class="panel panel-default">
+		          	<div class="panel-heading">
+		          		<button type="button" class="close" aria-label="Close">
+					            <span aria-hidden="true">&times;</span>
+					    </button>
+		          	</div>
+		    		<div class="panel-body">
+		    			<div class="media">
+						  <div class="media-left">
+						    <img src="image/default_user.png" class="media-object" style="width:60px">
+						  </div>
+						  <div class="media-body">
+						    <h4 class="media-heading">John Doe</h4>
+						    <p><small><i>Posted on June 6, 2016</i></small></p>
+						  </div>
+						  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						</div>
+		    		</div>
+		    		<div class="panel-footer">
+		    			<button class="btn btn-primary" type="button" id="like_btn">Submit</button>
+		    			<label class="control-label" for="like_btn">10086</label>
+		    		</div>
+	  			</div> <!-- panel-default --> 
+
+          	</div>
         </div><!-- /.blog-main -->
         <!-- Contact List -->
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar" style="background-color: lightblue">
-          <div class="sidebar-module">
+          <div class="sidebar-module" id="contactlist">
             <h4>Contacts</h4>
-            <ol class="list-unstyled">
-              <li>
-              	<div class="media">
-				  <div class="media-left">
-				    <img src="image/default_user.png" class="media-object" style="width:30px">
-				  </div>
-				  <div class="media-body">
-				    <label><a>John Doe</a></label>
-				  </div>
-				</div>
-              </li>
-            </ol>
           </div>
        	</div><!-- /.blog-sidebar -->
 
@@ -120,7 +123,12 @@
 
 	<!-- load jQuery -->
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Import Bootstrap JS -->
     <script src="./bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Import Custom JS -->
 	<script src="js/post.js"></script>
+	<script src="js/post-friend.js"></script>
+	<!-- Import FileStyle -->
+	<script type="text/javascript" src="CSS/bootstrap-filestyle-1.2.1/src/bootstrap-filestyle.js"> </script>
 </body>
 </html>

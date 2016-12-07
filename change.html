@@ -2,67 +2,119 @@
 <html>
 <head>
 	<title>Welcome to Pokemon World!</title>
-	<link rel="stylesheet" type="text/css" href="./CSS/index.css">
+	<!-- device dependent -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- load bootstrap framework -->
+	<link rel="stylesheet" type="text/css" href="./bootstrap-3.3.0/dist/css/bootstrap.min.css">
+	<!-- Load ico image icon -->
+	<link rel="icon" href="image/ico/pikachu.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="image/ico/pikachu.ico" type="image/x-icon" />
+	<!-- <link href="./CSS/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+	<!-- load Flat-UI plugins -->
+	<link rel="stylesheet" type="text/css" href="./CSS/Flat-UI-master/dist/css/flat-ui.min.css">
+	<link href="./CSS/Flat-UI-master/dist/css/flat-ui.css" rel="stylesheet">
 	<!-- load jQuery -->
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
+    <script src="./bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
     <!-- include JS -->
-    <!-- <script type="text/javascript" src="./js/index.js"></script> -->
+    <script type="text/javascript" src="./js/index.js"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="./CSS/index.css"> -->
 
     <!-- include profile -->
     <script src = "./js/profile.js"></script>
 </head>
 <body>
-	<ul id="navigation_bar">
-	  	<li id="home"><a href="index.html">Home</a></li>
-	  	<li id="news"></li>
-	  	<li id="pokemon"></li>
-	  	<!-- <li id="contact"></li>
-	  	<li id="profile"></li>
-	  	<li id="logout"></li> -->
-	  	<li style="float:right" id="signup"></li>
-	  	<li style="float:right" id="login"></li>
-	  	<li style="float:right" id="name_logo"></li>
-	</ul>
+	<nav class="navbar navbar-inverse" role="navigation">
+	  <div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+	      <span class="sr-only">Toggle navigation</span>
+	    </button>
+	    <a class="navbar-brand" href="index.html">Pokemon Go!</a>
+	  </div>
+	  <div class="collapse navbar-collapse" id="navbar-collapse-01">
+	    <ul id="" class="nav navbar-nav">
+	      <li><a href="index.html">Home</a></li>
+	      <li><a href="post.html">Posts</a></li>
+	      <li><a href="www.pokemongo.com/en/">Pokemons</a></li>
+	      <li class="active"><a>Profile</a></li>
+	    </ul>
+	    <p class="navbar-text navbar-right">Welcome! Sommoner</p>
+	  </div><!-- /.navbar-collapse -->
+	</nav><!-- /navbar -->
 	<div>
-		<img src="./image/index.jpg" width="100%" height="20%">
-		<div id="profile_login_panel" style="display: block;">
-			<div style="position:absolute; left:30%; top:35%; width:40%; height:50%; background-color:#FFF;opacity: 0.9;"> 
-			  
-			   <table border="0" align="center">
-			   	<tr>
-			   		<td colspan="2" align="center"><img width="30%" height="30%" src="./image/mystic.jpg"/></td>
-			   	</tr>
-			   	<!-- <tr>
-			   		<td align="right">reset user profile:</td><td><input type="button" value="reset" onclick="show();"/></td>
-			   	</tr> -->
-			   </table>
-			   	<div method="post" action="" >
-			   		<div style="display:block" id="showTable">
-			   			<table border="0" align="center">
-			   				<tr>
-			   					<td>userID:</td><td><input type="text" id = "profile_username" name="profile_username"
-			   					disabled="true" /></td>
-			   				</tr>
-			   				<tr>
-			   					<td>nickname:</td><td><input type="text" id = "profile_nickname" name="profile_nickname"/></td>
-			   				</tr>
-			   				<tr>
-			   					<td>email:</td><td><input type="text" id="profile_email_address" name="profile_email_address"/></td>
-			   				</tr>
-			   				<!-- <tr>
-			   					<td>team:</td><td><input type="text" name="team"/></td>
-			   				</tr> -->
-			   				<tr align="center">
-			   					<!-- <td colspan="2"><input id = "profile_change" type="submit" value="modify"/></td> -->
-			   					<td><input type='button' onclick='update()' value='modify'></td>
+		<img src="./image/change_profile_bg.png" width="100%" height="20%">
 
-			   					<td><input type='button' onclick='prom()' value='password'></td>
-			   				</tr>
-			            </table>
-			        </div>
-			    </div>
+		<div id="profile_login_panel" style="display: block;">
+			<div style="position:absolute; left:30%; top:25%; width:40%; height:60%; background-color:#FFF;opacity: 0.9;"> 
+			  
+			    <table border="0" align="center">
+			   	<tr>
+			   		<td colspan="2" align="center"><img src="image/default_user.png"/></td>
+			   	</tr>
+			   	</table>
+			   	<!-- Middle Panel -->
+				<div class="form-horizontal" role="form" >
+		            <div class="form-group">
+		              <label for="profile_username" class="col-lg-offset-1 col-lg-2 control-label">Username</label>
+		              <div class="col-lg-8">
+		                <input type="email" class="form-control" id="profile_username" disabled="true">
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label for="profile_nickname" class=" col-lg-offset-1 col-lg-2 control-label">Nickname</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" id="profile_nickname">
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <label for="profile_email_address" class="col-lg-offset-1 col-lg-2 control-label">Email</label>
+		              <div class="col-lg-8">
+		                <input type="text" class="form-control" id="profile_email_address">
+		              </div>
+		            </div>
+		            <div class="form-group">
+		              <div class="col-lg-offset-4 col-lg-8">
+		                <button type="submit" class="btn btn-primary" id="modify_btn">Modify</button>
+		                <!-- <button type="submit" class="btn btn-primary" id="password_btn" data-toggle="modal" data-target="#change_pwd_modal">Password</button> -->
+		                <button class="btn btn-primary" data-toggle="modal" data-target="#change_pwd_modal" type="button" id="password_btn">Password</button>
+		              </div>
+		            </div>
+	          	</div>
 			</div> 
+		</div>
+
+		<!-- Password Change Modal -->
+		<div class="modal fade" id="change_pwd_modal" tabindex="-1" role="dialog" aria-hidden="true">
+		    <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		          </button>
+		          <h4 class="modal-title">Change Your Password</h4>
+		        </div>
+		        <div class="modal-body">
+		          <div id="error_panel_modify" class="alert alert-danger" role="alert"></div>
+		          <div>				       
+		            <div class="form-group">
+		              <label for="old_password" class="form-control-label">Old Password</label>
+		              <input type="password" class="form-control" id="old_password" name="old_passwrod" placeholder="Please input your old password">
+		            </div>
+		            <div class="form-group">
+		              <label for="new_password" class="form-control-label">New Password</label>
+		              <input type="password" class="form-control" id="new_password" name="new_passwrod" placeholder="Please input your new password">
+		            </div>
+		            <div class="form-group">
+		              <label for="re_new_password" class="form-control-label"></label>
+		              <input type="password" class="form-control" id="re_new_password" name="new_passwrod" placeholder="Please input your new password again">
+		            </div>
+		          </div>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-primary" id="password_submit" >Submit</button>
+		        </div>
+		      </div>
+	    	</div>
 		</div>
 		<!-- <div style="position:absolute; left:20%; top:25%; width:60%; height:50%; background-color:#FFF;opacity: 0.9;"> 
 

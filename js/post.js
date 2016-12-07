@@ -1,9 +1,16 @@
 var post_array = new Array();
 
-$('#new_posts').focus(function() {
-	$('#postModal').modal();
-});
 
+
+
+$(document).ready(function(){
+    $('#new_posts').focus(function() {
+		$('#postModal').modal();
+	});
+	$("#pic-clear").click(function(){
+		$("#post-img").filestyle('clear');
+	});
+});
 /**
  * check user login
  */
@@ -74,19 +81,43 @@ function retrieve_posts() {
  * send one post to server
  */
 $("#post-send").click(function() {
+	formData = new FormData();
+	var fileSelect = $("#post-img").get(0);
+	if(fileSelect.files[0] != undefined) {
+		formData.append("pic", fileSelect.files[0]);
+	}
+	if ($('#post-text').val() == '' && fileSelect.files[0] == undefined) {
+		$('#error_panel_post').html("The post cannot be empty");
+		return;
+	}
+	
+	formData.append("post-content",$('#post-text').val());
+	formData.append("new","true");
+	
+	console.log(formData);
 	$.ajax({
 		url: "/cgi-bin/postHandler.py",
 		
 		type: "POST",
 		
-		data: "post-content=" + $('#post-text').val() +
-			   "&new=true",
+		data: formData,
+
+		processData: false,
+
+		contentType: false,
 
 		dataType: "json",
+
 		success: function(data) {
 			if(data.result == 'succeed') {
+				$('#postModal').modal('toggle');
+				$("#post-img").filestyle('clear');
+				$("#post-text").val("");
 				insertpost = render_post(data);
 				$("#posts").prepend(insertpost);
+				if(data.img) {
+					load_img(data)
+				}
 				post_array.push(data);
 			}
 			else {
@@ -151,7 +182,7 @@ function delete_post(post_id) {
 				$("#"+post_id).text(++old_likes);
 
 			}
-			else {
+			else if(data.result != "no change") {
 				alert("server error")
 			}
 		},
@@ -172,6 +203,9 @@ function delete_post(post_id) {
  	post_array.forEach(function(item){
  		insertpost = render_post(item);
 		$("#posts").append(insertpost);
+		if(item.img) {
+			load_img(item);
+		}
  	});
  }
 
@@ -197,59 +231,26 @@ function delete_post(post_id) {
 						  "<div class='media-body'>" +
 						    "<h4 class='media-heading'>" + post_data.author + "</h4>" + 
 						    "<p><small><i>Posts on " + post_data.date +"</i></small></p>" +
-						  "</div>"+
-						  "<p>" + post_data.content + "</p>" +
-						"</div>" +
-		    		"</div><!-- panel-body -->" +
-			    		"<div class='panel-footer'>" +
-			    			"<button class='btn btn-primary' type='button' id='like_btn' onclick='like_post(" + 
-			    					post_data.id + ")'>Like</button>" +
-			    			"<label class='control-label' for='like_btn' id="+ post_data.id +">"+ post_data.likes +"</label>" +
-			    		"</div>" + 
-	  				"</div><!-- panel-default -->";
 
- 	/*insertpost = "<div id='user-post" + post_data.id + "' class='row'>" +
- 						"<table border='0' style='word-break:break-all; word-wrap:break-all;'>" +
- 							"<a onclick='delete_post(" + post_data.id + ")'>" + "x" + "</a>" + 
- 							"<tr>" +
- 								"<td rowspan='2'>" +
- 									"image" +
-								"</td>" +
-								"<td><b>" + post_data.author + "</b></td>" +
-							"</tr>" +
-							"<tr>" +
-								"<td>"+ post_data.date +"</td>" +
-							"</tr>" +
-							"<tr>" + 
-								"<td colspan='2'>" +
-									"<p>" +
-										post_data.content + 
-									"</p>" +
-								"</td>" +
-							"</tr>" +
-							"<tr>" +
-								"<td>" +
-									"<div class = 'col-md-6'>" +
-										"<button class='btn btn-primary' onclick='like_post(" + post_data.id + ")'>" +
-											"Like" +
-										"</button>" +
-									"</div>" +
-								"</td>" +
-								"<td>" +
-									"<div class='col-md-6'>" +
-										"<button class='btn btn-primary'>" +
-											"Comment" +
-										"</button>" +
-									"</div>" +
-								"</td>" +
-							"</tr>" +
-							"<tr>" +
-								"<td colspan='2'>" +
-									"Comment Detail" +
-								"</td>" +
-							"</tr>" +
-						"</table>" +
-					"</div>";
-		*/
+						  "</div>" +
+						  "<div id=post-content" +  post_data.id + ">" +
+						  	"<p>" + post_data.content + "</p>" +
+						  "</div>" +
+						"</div>" +
+		    		"</div>" +
+			    	"<div class='panel-footer'>" +
+			    		"<button class='btn btn-primary' type='button' id='like_btn' onclick='like_post(" + 
+			    				post_data.id + ")'>Like</button>" +
+			    		"<label class='control-label' for='like_btn' id="+ post_data.id +">"+ post_data.likes +"</label>" +
+			    	"</div>" + 
+	  			"</div>";
+
 	return insertpost;
  }
+
+ function load_img(data) {
+ 	img = $("<img id='post-img' style='max-width: 100%; width: auto; height: auto;'>");
+	img.attr("src", data.img);
+	img.prependTo("#post-content" + data.id);
+ }
+

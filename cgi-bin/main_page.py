@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#! /usr/bin/python
 
 # use cookie for persistant data storage
 # if no cookie, return the login page

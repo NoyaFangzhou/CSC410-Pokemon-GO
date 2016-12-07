@@ -3,5 +3,7 @@ CREATE TABLE IF NOT EXISTS post (
 	author VARCHAR(50) NOT NULL,
 	content CHAR(255) NOT NULL,
 	date DATETIME NOT NULL,
-	likes INT
+	likes INT,
+	likers TEXT,
+	img BOOLEAN
 )

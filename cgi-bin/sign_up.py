@@ -9,7 +9,6 @@ import json
 import Cookie
 import os
 
-
 cgitb.enable()
 
 ##http response
@@ -35,6 +34,8 @@ team = form['team'].value
 
 #SALT
 salt = str(datetime.datetime.now())
+
+
 
 #ENCRYPTED PASSWORD
 hasher = hashlib.md5()
