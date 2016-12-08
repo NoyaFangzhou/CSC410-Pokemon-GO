@@ -10,26 +10,34 @@
 	<!-- load Flat-UI plugins -->
 	<link rel="stylesheet" type="text/css" href="./CSS/Flat-UI-master/dist/css/flat-ui.min.css">
 	<link href="./CSS/Flat-UI-master/dist/css/flat-ui.css" rel="stylesheet">
+	<!-- Load ico image icon -->
+	<link rel="icon" href="image/ico/pikachu.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="image/ico/pikachu.ico" type="image/x-icon" />
 </head>
 <body background="lightgrey">
 
 	<nav class="navbar navbar-inverse" role="navigation">
-	  <div class="navbar-header">
-	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-	      <span class="sr-only">Toggle navigation</span>
-	    </button>
-	    <a class="navbar-brand" href="./index.html">Pokemon Go!</a>
-	  </div>
-	  <div class="collapse navbar-collapse" id="navbar-collapse-01">
-	   
-	    <p class="navbar-text navbar-right">Welcome! Sommoner</p>
-	  </div><!-- /.navbar-collapse -->
-	</nav><!-- /navbar -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" href=" ">Pokemon Go!</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+      <ul id="" class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="post.html">Posts</a></li>
+        <li><a href="http://www.pokemongo.com/en/">Pokemons</a></li>
+        <li><a href="change.html">Profile</a></li>
+        <li><a href="search.html">Search</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav><!-- /navbar -->
 
 	<div class="container">
       <div class="row" >
 
-      	<div class="col-sm-3  blog-main" style="background-color: lightblue">
+      	<div class="col-sm-3  blog-main" style="background-color: white">
           <div class="sidebar-module">
             <!-- <h4>Contacts</h4> -->
 
@@ -40,25 +48,14 @@
 				  </div>
 				  <div class="media-body">
 				    
-				     <img src="image/default_user.png" class="media-object" id="userImage">
-				     <h4 class="media-heading" id="username">John Doe</h4>
-				    <!-- <p><small><i>Posted on June 6, 2016</i></small></p> -->
-				  </div>
-					  <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
-				</div>
-              <!-- <li>
-              	<div class="media">
-				  <div class="media-left">
-				    <img src="image/default_user.png" class="media-object" style="width:30px">
-				  </div>
-				  <div class="media-body">
-				    <label><a>John Doe</a></label>
+				     <img  class="media-object" id="userImage" style="width:180px">
+				     <h3 class="media-heading" id="username"></h3>
 				  </div>
 				</div>
-              </li> -->
+       
               <li>
               	<div align="center">
-                    <button type="button" class="btn btn-primary" id="followButton">Follow</button>
+                    <button type="button" class="btn btn-primary" id="followButton"></button>
                     
                 </div>
               </li>
@@ -103,37 +100,7 @@
           	<br>
           	<div id="posts">
           	</div>
-
           	
-           	<div class="panel panel-default">
-	          	<div class="panel-heading">
-	          		<!-- <button type="button" class="close" aria-label="Close">
-				            <span aria-hidden="true">&times;</span>
-				    </button> -->
-	          	</div>
-	    		<div class="panel-body">
-	    			<div class="media">
-					  <div class="media-left">
-					    <img src="image/default_user.png" class="media-object" style="width:60px">
-					  </div>
-					  <div class="media-body">
-					    <h4 class="media-heading">John Doe</h4>
-					    <p><small><i>Posted on June 6, 2016</i></small></p>
-					  </div>
-					  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-	    		</div>
-	    		<div class="panel-footer">
-	    			<!-- <button class="btn btn-primary" type="button" id="like_btn">Submit</button>
-	    			<label class="control-label" for="like_btn">10086</label> -->
-	    		</div>
-
-
-
-  			</div> 
-
-          	
-
         </div><!-- /.blog-main -->
         
 
@@ -144,7 +111,7 @@
 	<!-- load jQuery -->
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="./bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
-	<script src="js/post.js"></script>
-
+	<script src="js/follower-post.js"></script>
+	<script src = "js/user.js"></script>
 </body>
 </html>

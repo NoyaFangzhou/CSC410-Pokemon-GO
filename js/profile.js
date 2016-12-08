@@ -1,12 +1,32 @@
 
-
 $(document).ready(function(){
+    /**
+     * check user login
+     */
+    $.ajax({
+      url: "/cgi-bin/accessManager.py",
 
+      type: "POST",
 
-     load_profile();
+      dataType: "json",
 
-     $('#modify_btn').click(update);
-     $('#password_submit').click(modify_pwd);
+      success: function(data) {
+        if(data.access == "deny") {
+          alert("Please Login");
+          window.location.pathname = "index.html";
+        }
+        else {
+          load_profile();
+
+         $('#modify_btn').click(update);
+         $('#password_submit').click(modify_pwd);
+        }
+      },
+
+      error: function(data) {
+        alert("server error");
+      }
+    });
      // $('#home').html("<a href='main_page.html'></a>");
 });  
 /**

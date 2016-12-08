@@ -76,24 +76,25 @@ elif post_form.getvalue('retrieve'):
 
 #delete one post
 elif post_form.getvalue('delete'):
-	post_id = post_form.getvalue('id');
-	result = postDBManager.delete_post(post_id);
+	post_id = post_form.getvalue('id')
+	result = postDBManager.delete_post(post_id)
 	if result == True:
 		files = os.listdir("../pictures")
 		for file in files:
 			if file == post_id:
-				os.remove("../pictures/" + file);
+				os.remove("../pictures/" + file)
 		return_data = {"result" : "succeed"}
 	else:
 		return_data = {"result" : "failed"}
 
+#like a post
 elif post_form.getvalue('like'):
 	##retrieve user cookie
 	stored_cookie_string = os.environ.get('HTTP_COOKIE')
 	cookie = Cookie.SimpleCookie(stored_cookie_string)
-	post_id = post_form.getvalue('id');
+	post_id = post_form.getvalue('id')
 	liker_id = cookie['user_name'].value
-	result = postDBManager.do_like(post_id, liker_id);
+	result = postDBManager.do_like(post_id, liker_id)
 	if not result:
 		return_data['result'] = 'failed'
 	elif result == "No change":
@@ -101,7 +102,20 @@ elif post_form.getvalue('like'):
 	else:
 		return_data['result'] = 'succeed'
 
-# elif post_form.getvalue('test'):
-# 	file = post_from['']
+#show posts of friend
+elif post_form.getvalue('friend-post'):
+	friend_id = post_form.getvalue('id')
+	##retrieve friend post from DB
+	friend_posts = postDBManager.query_post(friend_id)
+	if friend_posts == 'Error':
+		return_data['result'] = 'failed'
+	
+	if friend_posts is not None:
+		for post in friend_posts:
+			post['date'] = str(post['date'])
+			if post['img'] == 1:
+				post['img'] = 'pictures/' + str(post['id'])
+		return_data = json.dumps( [dict(ix) for ix in friend_posts] )
+
 
 print json.dumps(return_data)

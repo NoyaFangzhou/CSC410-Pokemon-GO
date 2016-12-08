@@ -100,5 +100,23 @@ def if_follow(username , friend):
 		con.close()
 		return False
 
+
+def get_team(username):
+	search_sql = "SELECT team from user_account where user_id = %s"
+
+	#connect DB
+	con = connect()
+	if con == None:
+		return False
+	try:
+		with con.cursor() as cursor:
+			cursor.execute(search_sql,(username,));
+			result = cursor.fetchone()
+			con.close()
+			return result
+	except Exception as e:
+		print e
+		con.close()
+		return False
 		# DELETE FROM user_follow WHERE user_follow.user_follower IN (SELECT user_account.ID FROM user_account WHERE user_account.user_ID = 'x') AND user_follow.user_followed IN (SELECT user_account.ID FROM user_account WHERE user_account.user_ID = 'b')
 		# INSERT INTO user_follow (user_follower , user_followed)  SELECT user1.ID ,user2.ID FROM user_account user1,user_account user2  WHERE user1.user_ID = '1' and user2.user_ID = '2';

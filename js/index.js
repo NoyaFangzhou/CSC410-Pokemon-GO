@@ -112,7 +112,7 @@ var signup = function() {
   var re_password = $('#re_password').val();
   var email = $('#signup_email').val();
   var team;
-  //var regular_exp=/\S+@\S+\.\S+/;
+  var regular_exp=/\S+@\S+\.\S+/;
   //console.log(team);
 
   if(document.getElementById('team_mystic').checked){
@@ -144,11 +144,11 @@ var signup = function() {
   if(re_password==password){
     $('#error_panel_signup').html("");
   }
-  // if(!regular_exp.test(email)){
-  //   //console.log(regular_exp.test(email));
-  //   $('#error_panel_signup').html("your email style is not valid");
-  //   return;
-  // }
+  if(!regular_exp.test(email)){
+    //console.log(regular_exp.test(email));
+    $('#error_panel_signup').html("your email style is not valid");
+    return;
+  }
 
   $.ajax({
 

@@ -3,10 +3,6 @@ from dbconnector import connect
 from datetime import datetime
 
 # insert_post - insert one post into database
-# @data: json object, will return to user
-# @author: a string of user name
-# @post: the post request
-# return: true if insert success, false if db error
 def insert_post(post_data):
 
 	saved_img = False
@@ -50,7 +46,7 @@ def query_post(username):
 			count = cursor.execute(query_sql,(username,));
 			if count > 0:
 				results = cursor.fetchall();
-				
+
 			con.close()
 			return results
 	except Exception as e:
@@ -99,12 +95,13 @@ def do_like(post_id, liker_id):
 				return False
 
 			if result['likers'] is not None:
-				likers = result['likers'].split(",");
-				for liker in likers:
+				likers = result['likers']
+				liker_people = result['likers'].split(",");
+				for liker in liker_people:
 					if liker == liker_id:
 						con.close()
 						return 'No change'
-				likers += ("," + liker_id)
+				likers += (',' + liker_id)
 			else:
 				likers = liker_id
 
@@ -122,4 +119,3 @@ def do_like(post_id, liker_id):
 		print e
 		con.close()
 		return False
-	

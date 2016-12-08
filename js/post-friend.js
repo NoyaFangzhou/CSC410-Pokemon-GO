@@ -65,7 +65,7 @@ function show_friend(name , team){
             "<img src=\"" + team + "\" class=\"media-object\" style=\"width:30px\">" +
           "</div>" +
           "<div class=\"media-body\">" +
-            "<label><a >" + name + "</a></label>" +
+            "<label><a href='follower.html?" + name + "'>" + name + "</a></label>" +
           "</div>" + 
         "</div>" +
               "</li>" +
